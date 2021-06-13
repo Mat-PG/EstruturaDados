@@ -85,14 +85,14 @@ caminho = "./docs/"
 
 # Menu e ciclo de execução da aplicação
 print('------- INDEXAÇÃO -------')
-print("""0. Encerrar a aplicação
+print('''0. Encerrar a aplicação
 1. Criar Novo Documento
 2. Indexar documentos '.txt' presentes na pasta docs/
 3. Realizar consultas
     1. Usando operador OR
     2. Usando operador AND
     3. [opcional] Usando expressões booleanas
-4. Mostrar Índice Invertido (para debug / print)""")
+4. Mostrar Índice Invertido (para debug / print)''')
 
 while True:
     # O que o usuário deseja fazer
@@ -135,7 +135,7 @@ while True:
                         
                         remover_stop_words(palavras)
 
-                        palavras = stemming_singular(palavras)
+                        palavras = stemming(palavras)
 
                         for palavra in palavras:
                             if palavra in texto:
@@ -176,9 +176,9 @@ while True:
                     palavra2Stemming = stemming_singular(palavra2)
 
                 if option == "1":
-                    print(palavra1Stemming)
-                    print(palavra2Stemming)
-                    print(final_dict.get(palavra1Stemming))
+                    # print(palavra1Stemming)
+                    # print(palavra2Stemming)
+                    # print(final_dict.get(palavra1Stemming))
                     if palavra1Stemming == palavra2Stemming:
 
                         if palavra1Stemming in final_dict:
@@ -207,7 +207,6 @@ while True:
                             print(final_dict.get(palavra1Stemming))
                         else:
                             print("Palavras não relacionadas22")
-
                     else:
                         lista = []
                         
@@ -225,6 +224,16 @@ while True:
                                     local.append(item)
                         print(f'Ambas palavras se encontram em {local}',end=' ')
                          # verifica a Intersecção dos Values
+
+                if option == "3":
+
+                    # Lista doc palavra 1
+                    # Lista doc palavra 2
+                    # Lista doc palavra 3
+                    # Primeira expressão (palavra2 OR palavra3)
+                    # Segunda expressão res(1exp) AND palavra1
+                    palavra3 = str(input("palavra 3: ").strip())
+                    palavra3Stemming = stemming_singular(palavra3)
 
         elif decision == "4":
             # Instancia o objeto pickle, abre o arquivo em modo "rb" = read byte
