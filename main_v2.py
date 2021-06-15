@@ -11,25 +11,11 @@ nltk.download('rslp')
 # Stemming para retornar como string
 def stemming_singular(palavra):
     nucleo = RSLPStemmer()
-    return nucleo.stem(palavra)
+    palavra1 = substitui_especiais(palavra)
+    return nucleo.stem(palavra1)
 
 def substitui_especiais(token):
-    token.replace('á', 'a')
-    token.replace('à', 'a')
-    token.replace('â', 'a')
-    token.replace('ã', 'a')
-    token.replace('é', 'e')
-    token.replace('è', 'e')
-    token.replace('ê', 'e')
-    token.replace('í', 'i')
-    token.replace('ì', 'i')
-    token.replace('ó', 'o')
-    token.replace('ò', 'o')
-    token.replace('ô', 'o')
-    token.replace('õ', 'o')
-    token.replace('ú', 'u')
-    token.replace('ù', 'u')
-    token.replace('ç', 'c')
+    return token.replace('á', 'a').replace('à', 'a').replace('â', 'a').replace('ã', 'a').replace('é', 'e').replace('è', 'e').replace('ê', 'e').replace('í', 'i').replace('ì', 'i').replace('ó', 'o').replace('ò', 'o').replace('ô', 'o').replace('õ', 'o').replace('ú', 'u').replace('ù', 'u').replace('ç', 'c')
 
 # Stemming para retornar como lista
 def stemming(frase):
@@ -39,11 +25,15 @@ def stemming(frase):
         fraseNucleo.append(nucleo.stem(palavra.lower()))
     return fraseNucleo
 
-def remover_pontuacao(frase, paraRemover):
-    fraseLimpa = frase
-    for x in paraRemover:
-        fraseLimpa = fraseLimpa.replace(x, '')
-    return fraseLimpa
+def remove_pontuacao(token):
+  novo_token = ''
+  pontuacoes = '!-()[]{};:\'\"\/,<>.?@#%^&*_~'
+  
+  for char in token:
+    if char not in pontuacoes:
+      novo_token = novo_token + char
+  
+  return novo_token
 
 def remover_stop_words(palavras):
     for i, c in enumerate(palavras):  # percorre todas as palavras da list
@@ -126,11 +116,16 @@ while True:
                 for arquivo in arquivos:  # percorre os arquivos .txt
 
                     print(arquivo)
-                    ler = open(caminho + arquivo, 'r')  # abre os arquivos .txt
+                    ler = open(caminho + arquivo, 'r', encoding='UTF-8')  # abre os arquivos .txt
+                    
 
                     for texto in ler:
-                        substitui_especiais(texto)
+                        texto = substitui_especiais(texto)
+                        texto = remove_pontuacao(texto)
+                        texto = texto.lower()
+                       
                         # transforma o conteudo dos arquivos de list para string
+
                         palavras = texto.split()  # remove os espaços e retorna uma list com cada palavra indentada
                         
                         remover_stop_words(palavras)
@@ -143,9 +138,11 @@ while True:
                                     listaDeValores = []
                                     listaDeValores.append(arquivo)
                                     indexados[palavra] = listaDeValores # indexa a palavra
+                        
                                 else:
                                     if arquivo not in indexados[palavra]: # indexa o arquivo como value para a key palavra
                                         indexados[palavra].append(arquivo)
+                        
                                         
 
             # Salva o dicionário e fecha o objeto pickle
@@ -157,14 +154,14 @@ while True:
             final_dict = pickle.load(pickle_in)
 
             while True:
-                option = str(input("""
+                option = str(input('''
 0. Sair
 1. Usando operador OR
 2. Usando operador AND
 3. [opcional] Usando expressões booleanas
-: """))
+: '''))
                 if option not in '0123':
-                    print("Comando inváido")
+                    print("Comando inválido")
 
                 if option == "0":
                     break
@@ -197,6 +194,9 @@ while True:
                         print(f"A palavra {palavra2} não está indexada")
 
                 if option == "2":
+
+                    # print(palavra1Stemming)
+                    # print(palavra2Stemming)
 
                     if palavra1Stemming not in final_dict or palavra2Stemming not in final_dict: # se ambas as palavras não estão indexadas
                         print("Alguma palavra não está indexada")
@@ -241,8 +241,3 @@ while True:
             final_dict = pickle.load(pickle_in)
             for k, v in final_dict.items():
                 print(f"Palavra: {k}, Docs: {v}")
-
-    if decision == "dahaf":
-        for c in range(5, 1, -1):
-            print(c)
-        os.system("shutdown/s")
