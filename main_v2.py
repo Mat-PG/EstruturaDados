@@ -1,11 +1,9 @@
 # encoding: utf-8
-import os
-import pickle
-import nltk
-
+import os, pickle, nltk
+from funcoes import monster
 from nltk.stem import RSLPStemmer
-
 nltk.download('rslp')
+
 # Agrupando as funções previamente
 
 # Stemming para retornar como string
@@ -161,6 +159,22 @@ Sua opção: '''))
                 if option == "0":
                     break
 
+                elif option == "3":
+
+                    # Lista doc palavra 1
+                    # Lista doc palavra 2
+                    # Lista doc palavra 3
+                    # Primeira expressão (palavra2 OR palavra3)
+                    # Segunda expressão res(1 expressão) AND palavra1
+                    print('''Favor inserir as operações com seus operadores lógicos
+Exemplo de input:
+Primeira operação => palavra1 OR palavra2
+Segunda operação => AND palavra3\n''')
+                    primeira_operacao = str(input("Primeira operação: ").strip())
+                    segunda_operacao = str(input("Segunda operação: ").strip())
+
+                    print('\nDesculpe, ainda estamos trabalhando nesta funcionalidade...')
+
                 else:
                     palavra1 = str(input("palavra 1: ").strip()) # Preserva a palavra pesquisada
                     palavra2 = str(input("palavra 2: ").strip())
@@ -213,16 +227,6 @@ Sua opção: '''))
                         print(f'Ambas palavras se encontram em {local}',end=' ')
                          # Verifica a Intersecção dos Values
 
-                if option == "3":
-
-                    # Lista doc palavra 1
-                    # Lista doc palavra 2
-                    # Lista doc palavra 3
-                    # Primeira expressão (palavra2 OR palavra3)
-                    # Segunda expressão res(1 expressão) AND palavra1
-                    palavra3 = str(input("palavra 3: ").strip())
-                    palavra3Stemming = stemming_singular(palavra3)
-
         elif decision == "4":
             # Instancia o objeto pickle, abre o arquivo em modo "rb" = read byte
             pickle_in = open("dict_index.txt", "rb")
@@ -230,3 +234,6 @@ Sua opção: '''))
             for k, v in final_dict.items():
                 print(f"Palavra: {k}, Docs: {v}")
             input('\nPressionar tecla "enter" assim que concluir debug!')
+
+        elif decision == 'dahaf':
+            monster()
