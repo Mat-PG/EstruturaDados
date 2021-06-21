@@ -159,21 +159,21 @@ Sua opção: '''))
                 if option == "0":
                     break
 
-                elif option == "3":
+#                 elif option == "3":
 
-                    # Lista doc palavra 1
-                    # Lista doc palavra 2
-                    # Lista doc palavra 3
-                    # Primeira expressão (palavra2 OR palavra3)
-                    # Segunda expressão res(1 expressão) AND palavra1
-                    print('''Favor inserir as operações com seus operadores lógicos
-Exemplo de input:
-Primeira operação => palavra1 OR palavra2
-Segunda operação => AND palavra3\n''')
-                    primeira_operacao = str(input("Primeira operação: ").strip())
-                    segunda_operacao = str(input("Segunda operação: ").strip())
+#                     # Lista doc palavra 1
+#                     # Lista doc palavra 2
+#                     # Lista doc palavra 3
+#                     # Primeira expressão (palavra2 OR palavra3)
+#                     # Segunda expressão res(1 expressão) AND palavra1
+#                     print('''Favor inserir as operações com seus operadores lógicos
+# Exemplo de input:
+# Primeira operação => palavra1 OR palavra2
+# Segunda operação => AND palavra3\n''')
+#                     primeira_operacao = str(input("Primeira operação: ").strip())
+#                     segunda_operacao = str(input("Segunda operação: ").strip())
 
-                    print('\nDesculpe, ainda estamos trabalhando nesta funcionalidade...')
+#                     print('\nDesculpe, ainda estamos trabalhando nesta funcionalidade...')
 
                 else:
                     palavra1 = str(input("palavra 1: ").strip()) # Preserva a palavra pesquisada
@@ -182,12 +182,6 @@ Segunda operação => AND palavra3\n''')
                     palavra2Stemming = stemming_singular(palavra2)
 
                 if option == "1":
-                    if palavra1Stemming == palavra2Stemming:
-
-                        if palavra1Stemming in final_dict:
-                            print(palavra1Stemming + ": " + final_dict.get(palavra1Stemming).to_s)
-                        else:
-                            print("Palavra(s) não encontradas")
 
                     if palavra1Stemming in final_dict.keys():
                         print(f"A palavra {palavra1} esta no(s) arquivo(s): {final_dict.get(palavra1Stemming)}")
@@ -203,12 +197,6 @@ Segunda operação => AND palavra3\n''')
                     if palavra1Stemming not in final_dict or palavra2Stemming not in final_dict: # Se ambas as palavras não estão indexadas
                         print("Alguma palavra não está indexada")
 
-                    elif palavra1Stemming == palavra2Stemming:
-
-                        if palavra1Stemming in final_dict:
-                            print(final_dict.get(palavra1Stemming))
-                        else:
-                            print("Palavras não relacionadas22")
                     else:
                         lista = []
                         
